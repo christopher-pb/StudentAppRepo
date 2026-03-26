@@ -69,3 +69,33 @@ jobs:
 
       - name: Verify images
         run: docker images | Select-String "student-app"
+
+      - name: Clean up old images
+        run: docker image prune -f
+
+  # ── Deploy ───────────────────────────────────────────
+  deploy:
+    runs-on: self-hosted
+    needs: [docker-build]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Mark workspace as safe directory
+        run: git config --global --add safe.directory "${{ github.workspace }}"
+
+      - name: Stop existing containers (preserve volumes)
+        run: docker-compose down 2>&1 | Out-Default
+        continue-on-error: true
+
+      - name: Start services with fresh build
+        run: docker-compose up --build -d 2>&1 | Out-Default
+
+      - name: Wait for services to be healthy
+        run: |
+          Start-Sleep -Seconds 15
+          docker-compose ps
+
+      - name: Verify application health
+        run: |
+          $response = Invoke-WebRequest -Uri http://localhost:8000/api/health -UseBasicParsing
+          if ($response.StatusCode -eq 200) { Write-Host "Backend is healthy" } else { exit 1 }
