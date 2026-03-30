@@ -1,5 +1,5 @@
 # Student Management Application
-
+Sujain kumar
 A production-ready, full-stack Student Management web application built with **React**, **FastAPI**, and **PostgreSQL**, fully containerized with **Docker Compose**, monitored via **Prometheus + Grafana**, tested with **pytest, Jest, and Selenium**, and deployed through a **GitHub Actions CI/CD pipeline** using a self-hosted runner.
 
 ---
