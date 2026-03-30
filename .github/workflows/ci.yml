@@ -14,16 +14,7 @@ jobs:
       run:
         working-directory: backend
     steps:
-      - name: Clean locked files
-        run: |
-          $ws = "${{ github.workspace }}"
-          foreach ($dir in '.pytest_cache', '__pycache__', 'selenium\.pytest_cache', 'selenium\__pycache__') {
-            $p = Join-Path $ws $dir
-            if (Test-Path $p) { attrib -r -h -s "$p\*" /s /d 2>$null; Remove-Item $p -Recurse -Force -ErrorAction SilentlyContinue }
-          }
-        working-directory: .
-        continue-on-error: true
-
+     
       - uses: actions/checkout@v4
 
       - name: Mark workspace as safe directory
@@ -45,16 +36,7 @@ jobs:
       run:
         working-directory: frontend
     steps:
-      - name: Clean locked files
-        run: |
-          $ws = "${{ github.workspace }}"
-          foreach ($dir in '.pytest_cache', '__pycache__', 'selenium\.pytest_cache', 'selenium\__pycache__') {
-            $p = Join-Path $ws $dir
-            if (Test-Path $p) { attrib -r -h -s "$p\*" /s /d 2>$null; Remove-Item $p -Recurse -Force -ErrorAction SilentlyContinue }
-          }
-        working-directory: .
-        continue-on-error: true
-
+     
       - uses: actions/checkout@v4
 
       - name: Mark workspace as safe directory
@@ -76,16 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [backend-test, frontend-test]
     steps:
-      - name: Clean locked files
-        run: |
-          $ws = "${{ github.workspace }}"
-          foreach ($dir in '.pytest_cache', '__pycache__', 'selenium\.pytest_cache', 'selenium\__pycache__') {
-            $p = Join-Path $ws $dir
-            if (Test-Path $p) { attrib -r -h -s "$p\*" /s /d 2>$null; Remove-Item $p -Recurse -Force -ErrorAction SilentlyContinue }
-          }
-        continue-on-error: true
-
-      - uses: actions/checkout@v4
+           - uses: actions/checkout@v4
 
       - name: Mark workspace as safe directory
         run: git config --global --add safe.directory "${{ github.workspace }}"
@@ -126,16 +99,7 @@ jobs:
       run:
         working-directory: backend
     steps:
-      - name: Clean locked files
-        run: |
-          $ws = "${{ github.workspace }}"
-          foreach ($dir in '.pytest_cache', '__pycache__', 'selenium\.pytest_cache', 'selenium\__pycache__') {
-            $p = Join-Path $ws $dir
-            if (Test-Path $p) { attrib -r -h -s "$p\*" /s /d 2>$null; Remove-Item $p -Recurse -Force -ErrorAction SilentlyContinue }
-          }
-        working-directory: .
-        continue-on-error: true
-
+     
       - uses: actions/checkout@v4
 
       - name: Mark workspace as safe directory
@@ -157,16 +121,7 @@ jobs:
       run:
         working-directory: frontend
     steps:
-      - name: Clean locked files
-        run: |
-          $ws = "${{ github.workspace }}"
-          foreach ($dir in '.pytest_cache', '__pycache__', 'selenium\.pytest_cache', 'selenium\__pycache__') {
-            $p = Join-Path $ws $dir
-            if (Test-Path $p) { attrib -r -h -s "$p\*" /s /d 2>$null; Remove-Item $p -Recurse -Force -ErrorAction SilentlyContinue }
-          }
-        working-directory: .
-        continue-on-error: true
-
+      
       - uses: actions/checkout@v4
 
       - name: Mark workspace as safe directory
@@ -188,16 +143,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [backend-test, frontend-test]
     steps:
-      - name: Clean locked files
-        run: |
-          $ws = "${{ github.workspace }}"
-          foreach ($dir in '.pytest_cache', '__pycache__', 'selenium\.pytest_cache', 'selenium\__pycache__') {
-            $p = Join-Path $ws $dir
-            if (Test-Path $p) { attrib -r -h -s "$p\*" /s /d 2>$null; Remove-Item $p -Recurse -Force -ErrorAction SilentlyContinue }
-          }
-        continue-on-error: true
-
-      - uses: actions/checkout@v4
+           - uses: actions/checkout@v4
 
       - name: Mark workspace as safe directory
         run: git config --global --add safe.directory "${{ github.workspace }}"
@@ -225,15 +171,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [docker-build]
     steps:
-      - name: Clean locked files
-        run: |
-          $ws = "${{ github.workspace }}"
-          foreach ($dir in '.pytest_cache', '__pycache__', 'selenium\.pytest_cache', 'selenium\__pycache__') {
-            $p = Join-Path $ws $dir
-            if (Test-Path $p) { attrib -r -h -s "$p\*" /s /d 2>$null; Remove-Item $p -Recurse -Force -ErrorAction SilentlyContinue }
-          }
-        continue-on-error: true
-
+     
       - uses: actions/checkout@v4
 
       - name: Mark workspace as safe directory
@@ -263,15 +201,7 @@ jobs:
 
     needs: [docker-build]
     steps:
-      - name: Clean locked files
-        run: |
-          $ws = "${{ github.workspace }}"
-          foreach ($dir in '.pytest_cache', '__pycache__', 'selenium\.pytest_cache', 'selenium\__pycache__') {
-            $p = Join-Path $ws $dir
-            if (Test-Path $p) { attrib -r -h -s "$p\*" /s /d 2>$null; Remove-Item $p -Recurse -Force -ErrorAction SilentlyContinue }
-          }
-        continue-on-error: true
-
+     
       - uses: actions/checkout@v4
 
       - name: Mark workspace as safe directory
